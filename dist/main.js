@@ -4805,6 +4805,7 @@ var $75afa6943437e26f$export$2e2bcd8739ae039 = /*#__PURE__*/ function(Component1
                     showSkins: null,
                     tempSkin: null
                 });
+                this.refs.skinToneButton.current.focus();
                 this.base.removeEventListener("click", this.handleBaseClick);
                 this.base.removeEventListener("keydown", this.handleBaseKeydown);
             }

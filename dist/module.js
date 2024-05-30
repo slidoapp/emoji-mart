@@ -2302,6 +2302,7 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
             showSkins: null,
             tempSkin: null
         });
+        this.refs.skinToneButton.current.focus();
         this.base.removeEventListener("click", this.handleBaseClick);
         this.base.removeEventListener("keydown", this.handleBaseKeydown);
     }
