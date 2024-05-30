@@ -5,9 +5,14 @@
   "workspaces": [
     "packages/*"
   ],
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "global": "dist/browser.js",
   "scripts": {
     "dev": "yarn workspace @emoji-mart/website dev",
-    "build": "yarn workspace emoji-mart build",
+    "build": "yarn workspace emoji-mart build && mv packages/emoji-mart/dist/* dist",
     "build:data": "yarn workspace @emoji-mart/data build",
     "build:react": "yarn workspace @emoji-mart/react build",
     "build:website": "yarn workspace @emoji-mart/website build",
@@ -38,5 +43,9 @@
   },
   "engines": {
     "yarn": ">=1"
-  }
+  },
+  "files": [
+    "/dist",
+    "LICENSE"
+  ]
 }
