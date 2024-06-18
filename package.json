@@ -38,9 +38,5 @@
   },
   "engines": {
     "yarn": ">=1"
-  },
-  "files": [
-    "/dist",
-    "LICENSE"
-  ]
+  }
 }
