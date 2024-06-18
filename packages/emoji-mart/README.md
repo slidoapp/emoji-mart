@@ -64,7 +64,7 @@ npm install --save @slidoapp/emoji-mart @emoji-mart/data @slidoapp/emoji-mart-re
 
 ```js
 import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+import Picker from '@slidoapp/emoji-mart-react'
 
 function App() {
   return (
@@ -124,7 +124,7 @@ You can use custom emojis by providing an array of categories and their emojis. 
 
 ```js
 import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+import Picker from '@slidoapp/emoji-mart-react'
 
 const custom = [
   {

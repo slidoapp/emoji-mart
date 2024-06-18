@@ -58,12 +58,12 @@ In this example data is fetched from a content delivery network, but it could al
 ## 🏪 Picker
 ### React
 ```sh
-npm install --save @slidoapp/emoji-mart @emoji-mart/data @emoji-mart/react
+npm install --save @slidoapp/emoji-mart @emoji-mart/data @slidoapp/emoji-mart-react
 ```
 
 ```js
 import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+import Picker from '@slidoapp/emoji-mart-react'
 
 function App() {
   return (
@@ -123,7 +123,7 @@ You can use custom emojis by providing an array of categories and their emojis. 
 
 ```js
 import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+import Picker from '@slidoapp/emoji-mart-react'
 
 const custom = [
   {
