@@ -31,7 +31,7 @@ yarn add @emoji-mart/data
 
 ```js
 import data from '@emoji-mart/data'
-import { Picker } from 'emoji-mart'
+import { Picker } from '@slidoapp/emoji-mart'
 
 new Picker({ data })
 ```
@@ -41,7 +41,7 @@ new Picker({ data })
 - **Cons:** Network latency, doesn’t work offline (unless you configure a ServiceWorker)
 
 ```js
-import { Picker } from 'emoji-mart'
+import { Picker } from '@slidoapp/emoji-mart'
 new Picker({
   data: async () => {
     const response = await fetch(
@@ -58,7 +58,7 @@ In this example data is fetched from a content delivery network, but it could al
 ## 🏪 Picker
 ### React
 ```sh
-npm install --save emoji-mart @emoji-mart/data @emoji-mart/react
+npm install --save @slidoapp/emoji-mart @emoji-mart/data @emoji-mart/react
 ```
 
 ```js
@@ -191,7 +191,7 @@ First, you need to make sure data has been initialized. You need to call this on
 
 ```js
 import data from '@emoji-mart/data'
-import { init } from 'emoji-mart'
+import { init } from '@slidoapp/emoji-mart'
 
 init({ data })
 ```
@@ -221,7 +221,7 @@ You can search without the Picker. Just like the emoji component, `data` needs t
 
 ```js
 import data from '@emoji-mart/data'
-import { init, SearchIndex } from 'emoji-mart'
+import { init, SearchIndex } from '@slidoapp/emoji-mart'
 
 init({ data })
 
@@ -242,7 +242,7 @@ You can get emoji data from a native emoji. This is useful if you want to get th
 
 ```js
 import data from '@emoji-mart/data'
-import { init, getEmojiDataFromNative } from 'emoji-mart'
+import { init, getEmojiDataFromNative } from '@slidoapp/emoji-mart'
 
 init({ data })
 
