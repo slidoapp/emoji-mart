@@ -1,4 +1,5 @@
 <div align="center">
+  <br><b> This is a fork of Emoji Mart, done by <a href="https://github.com/slidoapp/emoji-mart/">slidoapp</a></b>, which fixes some a11y issues.
   <br><b>Emoji Mart</b> is a customizable<br>emoji picker HTML component for the web
   <br><a href="https://missiveapp.com/open/emoji-mart">Demo</a>
   <br><br><a href="https://missiveapp.com/open/emoji-mart"><img width="639" alt="EmojiMart" src="https://user-images.githubusercontent.com/436043/163686169-766ef715-89b5-4ada-88d7-672623713bc0.png"></a>
@@ -260,7 +261,7 @@ getEmojiDataFromNative('🤞🏿').then(console.log)
 ```
 
 ## 🗺 Internationalization
-EmojiMart UI supports [multiple languages](https://github.com/missive/emoji-mart/tree/main/packages/emoji-mart-data/i18n), feel free to open a PR if yours is missing.
+EmojiMart UI supports [multiple languages](https://github.com/slidoapp/emoji-mart/tree/main/packages/emoji-mart-data/i18n), feel free to open a PR if yours is missing.
 
 ```js
 import i18n from '@emoji-mart/data/i18n/fr.json'

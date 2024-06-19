@@ -261,7 +261,7 @@ getEmojiDataFromNative('🤞🏿').then(console.log)
 ```
 
 ## 🗺 Internationalization
-EmojiMart UI supports [multiple languages](https://github.com/missive/emoji-mart/tree/main/packages/emoji-mart-data/i18n), feel free to open a PR if yours is missing.
+EmojiMart UI supports [multiple languages](https://github.com/slidoapp/emoji-mart/tree/main/packages/emoji-mart-data/i18n), feel free to open a PR if yours is missing.
 
 ```js
 import i18n from '@emoji-mart/data/i18n/fr.json'
