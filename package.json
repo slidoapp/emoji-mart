@@ -37,6 +37,7 @@
     "arrowParens": "always"
   },
   "engines": {
-    "yarn": ">=1"
+    "yarn": ">=1",
+    "node": ">=22.0.0"
   }
 }
