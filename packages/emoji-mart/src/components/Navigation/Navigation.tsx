@@ -78,6 +78,7 @@ export default class Navigation extends PureComponent {
                 type="button"
                 class="flex flex-grow flex-center"
                 role="tab"
+                tabIndex={selected ? 0 : -1}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   this.props.onClick({ category, i })
