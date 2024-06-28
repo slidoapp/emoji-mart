@@ -909,6 +909,7 @@ export default class Picker extends Component {
       >
         {categories.map((category) => {
           const { root, rows } = this.refs.categories.get(category.id)
+          const categoryName = category.name || I18n.categories[category.id]
 
           return (
             <div
@@ -916,8 +917,13 @@ export default class Picker extends Component {
               class="category"
               ref={root}
             >
-              <div class={`sticky padding-small align-${this.dir[0]}`}>
-                {category.name || I18n.categories[category.id]}
+              <div
+                aria-label={categoryName + ' emojis'}
+                aria-level="5"
+                role="heading"
+                class={`sticky padding-small align-${this.dir[0]}`}
+              >
+                {categoryName}
               </div>
               <div
                 class="relative"
@@ -1128,16 +1134,17 @@ export default class Picker extends Component {
         )}
 
         <div ref={this.refs.scroll} class="scroll flex-grow padding-lr">
-          <div
+          <section
             style={{
               width: this.props.dynamicWidth ? '100%' : lineWidth,
               height: '100%',
             }}
+            aria-label={I18n.a11y.available_emojis ?? 'Available emojis'}
           >
             {this.props.searchPosition == 'static' && this.renderSearch()}
             {this.renderSearchResults()}
             {this.renderCategories()}
-          </div>
+          </section>
         </div>
 
         {this.props.navPosition == 'bottom' && this.renderNav()}
