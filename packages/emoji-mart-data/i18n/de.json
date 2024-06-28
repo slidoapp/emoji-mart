@@ -25,5 +25,8 @@
     "4": "Mittel",
     "5": "Mitteldunkel",
     "6": "Dunkel"
+  },
+  "a11y": {
+    "available_emojis": "Verfügbare Emojis"
   }
 }

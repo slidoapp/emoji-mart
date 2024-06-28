@@ -25,5 +25,8 @@
     "4": "Trung bình",
     "5": "Trung bình tối",
     "6": "Tối"
+  },
+  "a11y": {
+    "available_emojis": "Biểu tượng cảm xúc có sẵn"
   }
 }

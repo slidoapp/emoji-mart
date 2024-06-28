@@ -25,5 +25,8 @@
     "4": "Morena",
     "5": "Morena-Escura",
     "6": "Escura"
+  },
+  "a11y": {
+    "available_emojis": "Emojis disponíveis"
   }
 }

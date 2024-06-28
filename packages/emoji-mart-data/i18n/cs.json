@@ -25,5 +25,8 @@
     "4": "Střední",
     "5": "Středně tmavý",
     "6": "Tmavý"
+  },
+  "a11y": {
+    "available_emojis": "Dostupné emoji"
   }
 }
