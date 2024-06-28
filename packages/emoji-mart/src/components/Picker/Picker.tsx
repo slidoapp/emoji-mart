@@ -549,6 +549,7 @@ export default class Picker extends Component {
 
     this.setState({ pos, keyboard: true }, () => {
       this.scrollTo({ row: pos[0] })
+      this.refs.scroll.current.querySelector('button[tabindex="0"]').focus()
     })
   }
 
@@ -758,6 +759,17 @@ export default class Picker extends Component {
     const selected = deepEqual(this.state.pos, pos)
     const key = pos.concat(emoji.id).join('')
 
+    // Make either the selected emoji or the very first emoji tabbable
+    // This implements the roving tabindex pattern
+    // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_focus_vs_selection
+    const buttonTabbable =
+      (pos[0] + pos[1] === 0 &&
+        this.state.pos[0] === -1 &&
+        this.state.pos[1] === -1) ||
+      (pos[0] === this.state.pos[0] && pos[1] === this.state.pos[1])
+        ? 0
+        : -1
+
     return (
       <PureInlineComponent key={key} {...{ selected, skin, size }}>
         <button
@@ -769,7 +781,7 @@ export default class Picker extends Component {
           title={this.props.previewPosition == 'none' ? emoji.name : undefined}
           type="button"
           class="flex flex-center flex-middle"
-          tabindex={pos[0] + pos[1] === 0 ? 0 : -1}
+          tabindex={buttonTabbable}
           onClick={(e) => this.handleEmojiClick({ e, emoji })}
           onMouseEnter={() => this.handleEmojiOver(pos)}
           onMouseLeave={() => this.handleEmojiOver()}
