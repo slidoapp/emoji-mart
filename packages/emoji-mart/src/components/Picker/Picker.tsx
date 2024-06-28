@@ -549,7 +549,15 @@ export default class Picker extends Component {
 
     this.setState({ pos, keyboard: true }, () => {
       this.scrollTo({ row: pos[0] })
-      this.refs.scroll.current.querySelector('button[tabindex="0"]').focus()
+      const tabbableButton = this.refs.scroll.current.querySelector(
+        'button[tabindex="0"]',
+      )
+
+      if (!tabbableButton) {
+        return console.warn('No tabbable button found', pos)
+      }
+
+      tabbableButton.focus()
     })
   }
 
@@ -770,6 +778,19 @@ export default class Picker extends Component {
         ? 0
         : -1
 
+    const onFocus = () => {
+      // Emojis can be selected by screen reader which happens outside of the
+      // emoji-mart's current selection mechanism. It currently relies on
+      // either mouse enter or kbd arrow navigation, but neither is necessarily
+      // triggered by screen readers. However, SRs can still focus the buttons
+      // just fine so I use it as a signal to pick up the selection there and
+      // set the current position.
+      if (deepEqual(this.state.pos, pos)) {
+        return
+      }
+      this.setState({ pos })
+    }
+
     return (
       <PureInlineComponent key={key} {...{ selected, skin, size }}>
         <button
@@ -783,6 +804,7 @@ export default class Picker extends Component {
           class="flex flex-center flex-middle"
           tabindex={buttonTabbable}
           onClick={(e) => this.handleEmojiClick({ e, emoji })}
+          onFocus={onFocus}
           onMouseEnter={() => this.handleEmojiOver(pos)}
           onMouseLeave={() => this.handleEmojiOver()}
           style={{
