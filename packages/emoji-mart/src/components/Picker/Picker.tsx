@@ -405,9 +405,9 @@ export default class Picker extends Component {
     this.setState({ searchResults: grid, pos }, afterRender)
   }
 
-  handleSearchKeyDown = (e) => {
+  handleEmojisKeyDown = (e) => {
     // const specialKey = e.altKey || e.ctrlKey || e.metaKey
-    const input = e.currentTarget
+    const input = this.refs.searchInput.current
     e.stopImmediatePropagation()
 
     switch (e.key) {
@@ -769,7 +769,7 @@ export default class Picker extends Component {
           title={this.props.previewPosition == 'none' ? emoji.name : undefined}
           type="button"
           class="flex flex-center flex-middle"
-          tabindex="-1"
+          tabindex={pos[0] + pos[1] === 0 ? 0 : -1}
           onClick={(e) => this.handleEmojiClick({ e, emoji })}
           onMouseEnter={() => this.handleEmojiOver(pos)}
           onMouseLeave={() => this.handleEmojiOver()}
@@ -821,7 +821,7 @@ export default class Picker extends Component {
               placeholder={I18n.search}
               onClick={this.handleSearchClick}
               onInput={this.handleSearchInput}
-              onKeyDown={this.handleSearchKeyDown}
+              onKeyDown={this.handleEmojisKeyDown}
               autoComplete="off"
             ></input>
             <span class="icon loupe flex">{Icons.search.loupe}</span>
@@ -893,6 +893,7 @@ export default class Picker extends Component {
           display: hidden ? 'none' : undefined,
           height: '100%',
         }}
+        onKeyDown={this.handleEmojisKeyDown}
       >
         {categories.map((category) => {
           const { root, rows } = this.refs.categories.get(category.id)
