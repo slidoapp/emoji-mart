@@ -805,6 +805,7 @@ export default class Picker extends Component {
             }}
           ></div>
           <Emoji
+            ariaHidden={true}
             emoji={emoji}
             set={this.props.set}
             size={this.props.emojiSize}

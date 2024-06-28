@@ -2,7 +2,7 @@ import { Data } from '../../config'
 import { SearchIndex } from '../../helpers'
 
 export default function Emoji(props) {
-  let { id, skin, emoji } = props
+  let { ariaHidden, id, skin, emoji } = props
 
   if (props.shortcodes) {
     const matches = props.shortcodes.match(SearchIndex.SHORTCODES_REGEX)
@@ -35,7 +35,11 @@ export default function Emoji(props) {
       : `https://cdn.jsdelivr.net/npm/emoji-datasource-${props.set}@15.0.1/img/${props.set}/sheets-256/64.png`
 
   return (
-    <span class="emoji-mart-emoji" data-emoji-set={props.set}>
+    <span
+      class="emoji-mart-emoji"
+      data-emoji-set={props.set}
+      aria-hidden={ariaHidden}
+    >
       {imageSrc ? (
         <img
           style={{
