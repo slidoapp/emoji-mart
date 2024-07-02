@@ -24,7 +24,10 @@ export default class Navigation extends PureComponent {
   }
 
   handleKeyDown = (e: KeyboardEvent) => {
-    e.stopImmediatePropagation()
+    // Escape should still propagate up since it can be used in a dialog
+    if (e.key !== 'Escape') {
+      e.stopImmediatePropagation()
+    }
 
     switch (e.key) {
       case 'ArrowLeft':
