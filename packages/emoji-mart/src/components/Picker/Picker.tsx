@@ -807,6 +807,7 @@ export default class Picker extends Component {
         <button
           aria-label={native}
           aria-selected={selected || undefined}
+          role="option"
           aria-posinset={posinset}
           aria-setsize={grid.setsize}
           data-keyboard={this.state.keyboard}
@@ -939,6 +940,7 @@ export default class Picker extends Component {
           display: hidden ? 'none' : undefined,
           height: '100%',
         }}
+        role="listbox"
         onKeyDown={this.handleEmojisKeyDown}
       >
         {categories.map((category) => {
