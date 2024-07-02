@@ -1,14 +1,15 @@
 // @ts-nocheck
 import { Component, createRef } from 'preact'
 
-import { deepEqual, sleep, getEmojiData } from '../../utils'
 import { Data, I18n, init } from '../../config'
-import { SearchIndex, Store, FrequentlyUsed } from '../../helpers'
+import { FrequentlyUsed, SearchIndex, Store } from '../../helpers'
 import Icons from '../../icons'
+import { deepEqual, getEmojiData, sleep } from '../../utils'
 
+import type { Category } from '@emoji-mart/data'
 import { Emoji } from '../Emoji'
-import { Navigation } from '../Navigation'
 import { PureInlineComponent } from '../HOCs'
+import { Navigation } from '../Navigation'
 
 const Performance = {
   rowsPerRender: 10,
@@ -617,6 +618,9 @@ export default class Picker extends Component {
 
   handleCategoryClick = ({ category, i }) => {
     this.scrollTo(i == 0 ? { row: -1 } : { categoryId: category.id })
+    // Notice I am merely selecting, not focusing. This is by design as user's focus
+    // should remain on the category tablist.
+    this.selectFirstEmojiInCategory(category)
   }
 
   handleEmojiOver(pos) {
@@ -659,6 +663,13 @@ export default class Picker extends Component {
       this.base.addEventListener('click', this.handleBaseClick, true)
       this.base.addEventListener('keydown', this.handleBaseKeydown, true)
     })
+  }
+
+  selectFirstEmojiInCategory(category: Category) {
+    const rowIndex = this.grid.findIndex(
+      (row) => row.__categoryId == category.id,
+    )
+    this.setState({ pos: [rowIndex, 0] })
   }
 
   closeSkins() {
