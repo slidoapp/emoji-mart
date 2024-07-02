@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { PureComponent } from 'preact/compat'
+import { PureComponent, createRef } from 'preact/compat'
 import { Data, I18n } from '../../config'
 import Icons from '../../icons'
 
@@ -16,9 +16,38 @@ export default class Navigation extends PureComponent {
       return !category.target
     })
 
+    this.tabListRef = createRef<HTMLElement>()
+
     this.state = {
       categoryId: this.categories[0].id,
     }
+  }
+
+  handleKeyDown = (e: KeyboardEvent) => {
+    e.stopImmediatePropagation()
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        this.navigate(-1)
+        break
+
+      case 'ArrowRight':
+        this.navigate(1)
+        break
+    }
+  }
+
+  navigate(delta: 1 | -1) {
+    const categoryIndex = this.categories.findIndex(
+      (c) => c.id === this.state.categoryId,
+    )
+    const nextIndex =
+      (categoryIndex + delta + this.categories.length) % this.categories.length
+    const nextCategory = this.categories[nextIndex]
+
+    this.setState({ categoryId: nextCategory.id })
+    this.tabListRef.current.children[nextIndex].focus()
+    this.props.onClick({ category: nextCategory, i: nextIndex })
   }
 
   renderIcon(category) {
@@ -59,8 +88,9 @@ export default class Navigation extends PureComponent {
         class="padding"
         data-position={this.props.position}
         dir={this.props.dir}
+        onKeyDown={this.handleKeyDown}
       >
-        <div class="flex relative" role="tablist">
+        <div class="flex relative" role="tablist" ref={this.tabListRef}>
           {this.categories.map((category, i) => {
             const title = category.name || I18n.categories[category.id]
             const selected =
