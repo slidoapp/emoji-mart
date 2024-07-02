@@ -6,7 +6,7 @@ import { FrequentlyUsed, SearchIndex, Store } from '../../helpers'
 import Icons from '../../icons'
 import { deepEqual, getEmojiData, sleep } from '../../utils'
 
-import type { Category } from '@emoji-mart/data'
+import type { Category } from '@slidoapp/emoji-mart-data'
 import { Emoji } from '../Emoji'
 import { PureInlineComponent } from '../HOCs'
 import { Navigation } from '../Navigation'

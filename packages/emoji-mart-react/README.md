@@ -5,11 +5,11 @@ This is a fork of Emoji Mart, done by [slidoapp](https://github.com/slidoapp/emo
 
 ## 🧑‍💻 Usage
 ```sh
-npm install --save @slidoapp/emoji-mart @emoji-mart/data @slidoapp/emoji-mart-react
+npm install --save @slidoapp/emoji-mart @slidoapp/emoji-mart-data @slidoapp/emoji-mart-react
 ```
 
 ```js
-import data from '@emoji-mart/data'
+import data from '@slidoapp/emoji-mart-data'
 import Picker from '@slidoapp/emoji-mart-react'
 
 function App() {
