@@ -897,7 +897,12 @@ export default class Picker extends Component {
     if (!searchResults) return null
 
     return (
-      <div class="category" ref={this.refs.search}>
+      <div
+        class="category"
+        ref={this.refs.search}
+        role="listbox"
+        onKeyDown={this.handleEmojisKeyDown}
+      >
         <div class={`sticky padding-small align-${this.dir[0]}`}>
           {I18n.categories.search}
         </div>
