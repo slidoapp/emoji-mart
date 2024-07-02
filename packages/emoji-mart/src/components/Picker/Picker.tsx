@@ -406,10 +406,14 @@ export default class Picker extends Component {
     this.setState({ searchResults: grid, pos }, afterRender)
   }
 
-  handleEmojisKeyDown = (e) => {
+  handleEmojisKeyDown = (e: KeyboardEvent) => {
     // const specialKey = e.altKey || e.ctrlKey || e.metaKey
     const input = this.refs.searchInput.current
-    e.stopImmediatePropagation()
+
+    // Escape should still propagate up since it can be used in a dialog
+    if (e.key !== 'Escape') {
+      e.stopImmediatePropagation()
+    }
 
     switch (e.key) {
       case 'ArrowLeft':
