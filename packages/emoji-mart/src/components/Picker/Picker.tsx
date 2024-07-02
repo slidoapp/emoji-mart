@@ -1180,7 +1180,7 @@ export default class Picker extends Component {
               width: this.props.dynamicWidth ? '100%' : lineWidth,
               height: '100%',
             }}
-            aria-label={I18n.a11y.available_emojis ?? 'Available emojis'}
+            aria-label={I18n.a11y?.available_emojis ?? 'Available emojis'}
           >
             {this.props.searchPosition == 'static' && this.renderSearch()}
             {this.renderSearchResults()}
