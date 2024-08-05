@@ -1072,7 +1072,7 @@ export default class Picker extends Component {
     const noSearchResults =
       this.state.searchResults && !this.state.searchResults.length
 
-    let contents = emoji
+    const contents = emoji
       ? emoji.name
       : noSearchResults
       ? I18n.search_no_results_2
