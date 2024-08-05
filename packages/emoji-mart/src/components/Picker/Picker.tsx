@@ -1070,7 +1070,7 @@ export default class Picker extends Component {
   renderLiveRegion() {
     const emoji = this.getEmojiByPos(this.state.pos)
     const noSearchResults =
-      this.state.searchResults && !this.state.searchResults.length
+      this.state.searchResults == null || this.state.searchResults.length === 0
 
     const contents = emoji
       ? emoji.name
