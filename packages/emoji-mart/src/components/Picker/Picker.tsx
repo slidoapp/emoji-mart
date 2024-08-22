@@ -867,7 +867,9 @@ export default class Picker extends Component {
     } else {
       let count = searchResults.flat().length
       let translation =
-        count === 1 ? I18n.emoji_found_singular : I18n.emojis_found_plural
+        count === 1
+          ? I18n?.a11y?.emoji_found_singular
+          : I18n?.a11y?.emojis_found_plural
       return [count, translation].join(' ')
     }
   }
@@ -889,7 +891,7 @@ export default class Picker extends Component {
               onClick={this.handleSearchClick}
               onInput={this.handleSearchInput}
               onKeyDown={this.handleEmojisKeyDown}
-              aria-label={I18n.search_input_aria_label}
+              aria-label={I18n?.a11y?.search_input_aria_label}
               autocomplete="off"
             />
             <span aria-hidden="true" class="icon loupe flex">
@@ -974,7 +976,7 @@ export default class Picker extends Component {
         }}
         role="listbox"
         onKeyDown={this.handleEmojisKeyDown}
-        aria-label={I18n.available_emojis}
+        aria-label={I18n?.a11y?.available_emojis}
       >
         {categories.map((category) => {
           const { root, rows } = this.refs.categories.get(category.id)
