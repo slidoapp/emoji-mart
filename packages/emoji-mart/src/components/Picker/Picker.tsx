@@ -10,6 +10,7 @@ import type { Category } from '@slidoapp/emoji-mart-data'
 import { Emoji } from '../Emoji'
 import { PureInlineComponent } from '../HOCs'
 import { Navigation } from '../Navigation'
+import ScreenReaderAnnouncement from '../ScreenReaderAnnouncement'
 
 const Performance = {
   rowsPerRender: 10,
@@ -707,6 +708,7 @@ export default class Picker extends Component {
         theme={this.state.theme}
         dir={this.dir}
         unfocused={!!this.state.searchResults}
+        disabled={!!this.state.searchResults}
         position={this.props.navPosition}
         onClick={this.handleCategoryClick}
       />
@@ -856,6 +858,20 @@ export default class Picker extends Component {
     )
   }
 
+  getResultMessage() {
+    const { searchResults } = this.state
+    if (searchResults === undefined || searchResults === null) return ''
+
+    if (searchResults.length <= 0) {
+      return I18n.search_no_results_2
+    } else {
+      let count = searchResults.flat().length
+      let translation =
+        count === 1 ? I18n.emoji_found_singular : I18n.emojis_found_plural
+      return [count, translation].join(' ')
+    }
+  }
+
   renderSearch() {
     const renderSkinTone =
       this.props.previewPosition == 'none' ||
@@ -873,9 +889,12 @@ export default class Picker extends Component {
               onClick={this.handleSearchClick}
               onInput={this.handleSearchInput}
               onKeyDown={this.handleEmojisKeyDown}
-              autoComplete="off"
-            ></input>
-            <span class="icon loupe flex">{Icons.search.loupe}</span>
+              aria-label={I18n.search_input_aria_label}
+              autocomplete="off"
+            />
+            <span aria-hidden="true" class="icon loupe flex">
+              {Icons.search.loupe}
+            </span>
             {this.state.searchResults && (
               <button
                 title="Clear"
@@ -889,7 +908,6 @@ export default class Picker extends Component {
               </button>
             )}
           </div>
-
           {renderSkinTone && this.renderSkinToneButton()}
         </div>
       </div>
@@ -913,6 +931,11 @@ export default class Picker extends Component {
         <div>
           {!searchResults.length ? (
             <div class={`padding-small align-${this.dir[0]}`}>
+              {this.props.previewPosition === 'none' && (
+                <p>
+                  {I18n.search_no_results_1} {I18n.search_no_results_2}
+                </p>
+              )}
               {this.props.onAddCustomEmoji && (
                 <a onClick={this.props.onAddCustomEmoji}>{I18n.add_custom}</a>
               )}
@@ -951,6 +974,7 @@ export default class Picker extends Component {
         }}
         role="listbox"
         onKeyDown={this.handleEmojisKeyDown}
+        aria-label={I18n.available_emojis}
       >
         {categories.map((category) => {
           const { root, rows } = this.refs.categories.get(category.id)
@@ -960,12 +984,15 @@ export default class Picker extends Component {
             <div
               data-id={category.target ? category.target.id : category.id}
               class="category"
+              role="group"
+              aria-labelledby={`${category.id}-heading`}
               ref={root}
             >
               <div
                 aria-label={categoryName + ' emojis'}
                 aria-level="5"
                 role="heading"
+                id={`${category.id}-heading`}
                 class={`sticky padding-small align-${this.dir[0]}`}
               >
                 {categoryName}
@@ -1039,6 +1066,8 @@ export default class Picker extends Component {
       return null
     }
 
+    const ariaSkinToneShown = this.state.showSkins ? 'true' : 'false'
+
     return (
       <div
         class="flex flex-auto flex-center flex-middle"
@@ -1052,7 +1081,10 @@ export default class Picker extends Component {
           type="button"
           ref={this.refs.skinToneButton}
           class="skin-tone-button flex flex-auto flex-center flex-middle"
-          aria-selected={this.state.showSkins ? 'true' : 'false'}
+          aria-selected={ariaSkinToneShown}
+          aria-expanded={ariaSkinToneShown}
+          aria-controls="skin-tone-options"
+          aria-haspopup="true"
           aria-label={`${I18n.skins.choose}, ${I18n.skins[this.state.skin]}`}
           title={I18n.skins.choose}
           onClick={this.openSkins}
@@ -1063,24 +1095,6 @@ export default class Picker extends Component {
         >
           <span class={`skin-tone skin-tone-${this.state.skin}`}></span>
         </button>
-      </div>
-    )
-  }
-
-  renderLiveRegion() {
-    const emoji = this.getEmojiByPos(this.state.pos)
-    const noSearchResults =
-      this.state.searchResults == null || this.state.searchResults.length === 0
-
-    const contents = emoji
-      ? emoji.name
-      : noSearchResults
-      ? I18n.search_no_results_2
-      : ''
-
-    return (
-      <div aria-live="polite" class="sr-only">
-        {contents}
       </div>
     )
   }
@@ -1117,6 +1131,7 @@ export default class Picker extends Component {
         class="menu hidden"
         data-position={position.top ? 'top' : 'bottom'}
         style={position}
+        id="skin-tone-options"
       >
         {[...Array(6).keys()].map((i) => {
           const skin = i + 1
@@ -1166,8 +1181,9 @@ export default class Picker extends Component {
     const lineWidth = this.props.perLine * this.props.emojiButtonSize
 
     return (
-      <section
+      <form
         id="root"
+        role="search"
         class="flex flex-column"
         dir={this.dir}
         style={{
@@ -1191,7 +1207,7 @@ export default class Picker extends Component {
               width: this.props.dynamicWidth ? '100%' : lineWidth,
               height: '100%',
             }}
-            aria-label={I18n.a11y?.available_emojis ?? 'Available emojis'}
+            role="presentation"
           >
             {this.props.searchPosition == 'static' && this.renderSearch()}
             {this.renderSearchResults()}
@@ -1202,8 +1218,11 @@ export default class Picker extends Component {
         {this.props.navPosition == 'bottom' && this.renderNav()}
         {this.props.previewPosition == 'bottom' && this.renderPreview()}
         {this.state.showSkins && this.renderSkins()}
-        {this.renderLiveRegion()}
-      </section>
+        <ScreenReaderAnnouncement
+          level="polite"
+          text={this.getResultMessage()}
+        />
+      </form>
     )
   }
 }

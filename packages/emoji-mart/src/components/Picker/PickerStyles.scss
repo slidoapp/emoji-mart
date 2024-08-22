@@ -127,12 +127,15 @@
 }
 
 .sr-only {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
   height: 1px;
+  margin: -1px;
   overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 a {
@@ -291,6 +294,11 @@ button {
     transition: color var(--duration) var(--easing);
 
     &:hover { color: var(--color-a) }
+  }
+
+  button:disabled {
+    color: var(--color-c);
+    cursor: not-allowed;
   }
 
   svg, img {
