@@ -2,6 +2,10 @@
   "search": "Search",
   "search_no_results_1": "Oh no!",
   "search_no_results_2": "That emoji couldn’t be found",
+  "emojis_found_plural": "emojis found",
+  "emoji_found_singular": "emoji found",
+  "search_input_aria_label": "Search emojis",
+  "available_emojis": "Available emojis",
   "pick": "Pick an emoji…",
   "add_custom": "Add custom emoji",
   "categories": {
