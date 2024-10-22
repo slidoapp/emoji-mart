@@ -238,6 +238,10 @@ a {
     transition-property: background-color, box-shadow;
     transition-timing-function: var(--easing);
 
+    @media (forced-colors: active) {
+      border: 1px solid ButtonBorder;
+    }
+
     &::placeholder {
       color: inherit;
       opacity: .6;
@@ -472,6 +476,7 @@ button {
   width: 16px; height: 16px;
   border-radius: 100%;
   overflow: hidden;
+  forced-color-adjust: none;
 
   &:after {
     content: "";
