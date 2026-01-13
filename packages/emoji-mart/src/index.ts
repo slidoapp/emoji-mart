@@ -1,4 +1,5 @@
 export { PickerElement as Picker } from './components/Picker'
+export { PickerStyles } from './components/Picker'
 export { EmojiElement as Emoji } from './components/Emoji'
 
 export { FrequentlyUsed, SafeFlags, SearchIndex, Store } from './helpers'

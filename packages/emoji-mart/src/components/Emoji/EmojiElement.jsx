@@ -1,7 +1,7 @@
 import { render } from 'preact'
 
 import { init, getProps } from '../../config'
-import { HTMLElement } from '../HTMLElement'
+import HTMLElement from '../HTMLElement/HTMLElement'
 import { Emoji } from '.'
 import EmojiProps from './EmojiProps'
 
