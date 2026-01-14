@@ -19,7 +19,7 @@
   },
   "peerDependencies": {
     "@slidoapp/emoji-mart": "^5.6",
-    "react": "^16.8 || ^17 || ^18"
+    "react": "^16.8 || ^17 || ^18 || ^19"
   },
   "files": [
     "/dist",
